@@ -138,17 +138,9 @@ public class SCIMClaimResolver {
         // get the URI of root attribute
         String attributeURI = multiValAttribute.getURI();
         // check if values are set as primitive values
-        List<Object> attributeValues = multiValAttribute.getAttributePrimitiveValues();
+        List attributeValues = multiValAttribute.getAttributePrimitiveValues();
         if (attributeValues != null && !attributeValues.isEmpty()) {
-            String values = null;
-            for (Object attributeValue : attributeValues) {
-                if (values != null) {
-                    values += attributeValue + ",";
-                } else {
-                    values = attributeValue + ",";
-                }
-            }
-            claimsMap.put(attributeURI, values);
+            claimsMap.put(attributeURI, String.join(",", attributeValues));
         }
 
         // check if values are set as complex values
